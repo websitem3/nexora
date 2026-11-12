@@ -1,0 +1,1549 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nexora </title>
+<meta name="description" content="Nexora adalah agensi digital yang membantu bisnis bertransformasi melalui web development, mobile app, UI/UX design, dan digital marketing.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ============================================
+   RESET & VARIABLES
+   ============================================ */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+
+:root{
+  --bg:#ffffff;
+  --bg-soft:#F6F7FB;
+  --dark:#070B1E;
+  --dark-2:#0E1430;
+  --text:#0B1020;
+  --muted:#5A6178;
+  --primary:#4F46E5;
+  --primary-2:#06B6D4;
+  --grad:linear-gradient(135deg,#4F46E5 0%,#7C3AED 45%,#06B6D4 100%);
+  --grad-soft:linear-gradient(135deg,rgba(79,70,229,.10),rgba(6,182,212,.10));
+  --border:#E8EAF2;
+  --radius:20px;
+  --radius-sm:14px;
+  --shadow-sm:0 4px 16px rgba(11,16,32,.06);
+  --shadow-md:0 12px 40px rgba(11,16,32,.09);
+  --shadow-lg:0 30px 70px rgba(11,16,32,.14);
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+
+body{
+  font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.65;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+
+body.no-scroll{overflow:hidden}
+
+img{max-width:100%;display:block}
+a{text-decoration:none;color:inherit}
+button{font-family:inherit;cursor:pointer;border:none;background:none}
+ul{list-style:none}
+
+.container{width:100%;max-width:1200px;margin:0 auto;padding:0 24px}
+
+/* ============================================
+   TYPOGRAPHY HELPERS
+   ============================================ */
+h1,h2,h3,h4{line-height:1.2;letter-spacing:-.02em;font-weight:800}
+.grad-text{
+  background:var(--grad);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;color:transparent;
+}
+
+.section{padding:110px 0;position:relative}
+.section-soft{background:var(--bg-soft)}
+.section-dark{background:var(--dark);color:#fff}
+
+.section-head{max-width:680px;margin:0 auto 64px;text-align:center}
+.section-head.left{margin-left:0;text-align:left}
+
+.eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:13px;font-weight:700;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--primary);
+  background:rgba(79,70,229,.08);
+  padding:8px 16px;border-radius:100px;margin-bottom:20px;
+}
+.section-dark .eyebrow{color:#A5B4FC;background:rgba(165,180,252,.12)}
+
+.section-head h2{font-size:clamp(30px,4vw,46px);margin-bottom:18px}
+.section-head p{color:var(--muted);font-size:17px}
+.section-dark .section-head p{color:rgba(255,255,255,.62)}
+
+/* ============================================
+   BUTTONS
+   ============================================ */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  padding:15px 30px;border-radius:100px;
+  font-weight:700;font-size:15px;letter-spacing:-.01em;
+  transition:all .35s var(--ease);white-space:nowrap;
+  position:relative;overflow:hidden;
+}
+.btn-primary{
+  background:var(--grad);color:#fff;
+  box-shadow:0 10px 30px rgba(79,70,229,.35);
+}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 18px 44px rgba(79,70,229,.45)}
+.btn-ghost{
+  background:rgba(255,255,255,.06);color:#fff;
+  border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(10px);
+}
+.btn-ghost:hover{background:rgba(255,255,255,.14);transform:translateY(-3px)}
+.btn-outline{
+  background:transparent;color:var(--text);
+  border:1.5px solid var(--border);
+}
+.btn-outline:hover{border-color:var(--primary);color:var(--primary);transform:translateY(-3px)}
+.btn-sm{padding:11px 22px;font-size:14px}
+.btn-lg{padding:17px 36px;font-size:16px}
+
+/* ============================================
+   HEADER / NAVBAR
+   ============================================ */
+.header{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  padding:20px 0;transition:all .4s var(--ease);
+}
+.header.scrolled{
+  padding:12px 0;
+  background:rgba(255,255,255,.82);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  box-shadow:0 1px 0 rgba(11,16,32,.07),0 8px 30px rgba(11,16,32,.05);
+}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;gap:24px}
+
+.logo{display:flex;align-items:center;gap:11px;font-weight:800;font-size:21px;letter-spacing:-.03em}
+.logo-mark{
+  width:40px;height:40px;border-radius:12px;
+  background:var(--grad);
+  display:grid;place-items:center;color:#fff;font-size:19px;font-weight:800;
+  box-shadow:0 8px 22px rgba(79,70,229,.4);
+  transition:transform .4s var(--ease);
+}
+.logo:hover .logo-mark{transform:rotate(-8deg) scale(1.06)}
+.logo-text{color:#fff;transition:color .4s}
+.header.scrolled .logo-text{color:var(--text)}
+.logo-text .dot{color:var(--primary-2)}
+
+.nav{display:flex;align-items:center;gap:34px}
+.nav a{
+  font-size:15px;font-weight:600;color:rgba(255,255,255,.78);
+  transition:color .3s;position:relative;
+}
+.nav a:not(.nav-cta)::after{
+  content:'';position:absolute;left:0;bottom:-6px;height:2px;width:0;
+  background:var(--grad);border-radius:2px;transition:width .35s var(--ease);
+}
+.nav a:not(.nav-cta):hover::after{width:100%}
+.nav a:hover{color:#fff}
+.header.scrolled .nav a{color:var(--muted)}
+.header.scrolled .nav a:hover{color:var(--text)}
+
+.nav-cta{color:#fff !important;padding:12px 24px;border-radius:100px;background:var(--grad);font-weight:700;box-shadow:0 8px 22px rgba(79,70,229,.32);transition:all .35s var(--ease)}
+.nav-cta:hover{transform:translateY(-2px);box-shadow:0 14px 32px rgba(79,70,229,.45)}
+
+.menu-toggle{
+  display:none;flex-direction:column;gap:5px;padding:8px;
+  position:relative;z-index:1001;
+}
+.menu-toggle span{
+  display:block;width:24px;height:2.5px;border-radius:2px;
+  background:#fff;transition:all .35s var(--ease);
+}
+.header.scrolled .menu-toggle span{background:var(--text)}
+.menu-toggle.active span:nth-child(1){transform:translateY(7.5px) rotate(45deg)}
+.menu-toggle.active span:nth-child(2){opacity:0;transform:scaleX(0)}
+.menu-toggle.active span:nth-child(3){transform:translateY(-7.5px) rotate(-45deg)}
+
+/* ============================================
+   HERO
+   ============================================ */
+.hero{
+  position:relative;background:var(--dark);color:#fff;
+  padding:170px 0 110px;overflow:hidden;
+}
+.hero-bg{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.blob{position:absolute;border-radius:50%;filter:blur(100px);will-change:transform}
+.blob-1{
+  width:560px;height:560px;background:#4F46E5;opacity:.45;
+  top:-200px;left:-140px;animation:float1 16s ease-in-out infinite;
+}
+.blob-2{
+  width:520px;height:520px;background:#06B6D4;opacity:.30;
+  top:-40px;right:-160px;animation:float2 20s ease-in-out infinite;
+}
+.blob-3{
+  width:400px;height:400px;background:#7C3AED;opacity:.25;
+  bottom:-220px;left:38%;animation:float1 22s ease-in-out infinite reverse;
+}
+@keyframes float1{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(40px,50px) scale(1.1)}}
+@keyframes float2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-50px,40px) scale(1.12)}}
+
+.grid-overlay{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);
+  background-size:64px 64px;
+  -webkit-mask-image:radial-gradient(ellipse 70% 60% at 50% 25%,#000 10%,transparent 75%);
+  mask-image:radial-gradient(ellipse 70% 60% at 50% 25%,#000 10%,transparent 75%);
+}
+
+.hero-inner{
+  position:relative;z-index:2;
+  display:grid;grid-template-columns:1.05fr .95fr;
+  gap:60px;align-items:center;
+}
+
+.hero-content{max-width:600px}
+
+.badge{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:8px 18px 8px 12px;border-radius:100px;
+  background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.13);
+  backdrop-filter:blur(10px);
+  font-size:13.5px;font-weight:600;color:rgba(255,255,255,.88);
+  margin-bottom:28px;
+}
+.pulse{
+  width:8px;height:8px;border-radius:50%;background:#34D399;
+  box-shadow:0 0 0 0 rgba(52,211,153,.7);
+  animation:pulse 2s infinite;
+}
+@keyframes pulse{
+  0%{box-shadow:0 0 0 0 rgba(52,211,153,.7)}
+  70%{box-shadow:0 0 0 12px rgba(52,211,153,0)}
+  100%{box-shadow:0 0 0 0 rgba(52,211,153,0)}
+}
+
+.hero h1{
+  font-size:clamp(36px,5.2vw,62px);
+  line-height:1.1;letter-spacing:-.035em;margin-bottom:24px;
+}
+.hero p.lead{
+  font-size:17.5px;color:rgba(255,255,255,.66);
+  max-width:530px;margin-bottom:38px;line-height:1.75;
+}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:52px}
+
+.hero-stats{
+  display:flex;gap:44px;flex-wrap:wrap;
+  padding-top:32px;border-top:1px solid rgba(255,255,255,.1);
+}
+.hero-stats .stat strong{
+  display:block;font-size:28px;font-weight:800;letter-spacing:-.03em;
+  background:linear-gradient(135deg,#fff,#A5B4FC);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+}
+.hero-stats .stat span{font-size:13.5px;color:rgba(255,255,255,.5);font-weight:500}
+
+/* Hero visual */
+.hero-visual{position:relative;perspective:1400px}
+
+.glass-card{
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.13);
+  backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+  border-radius:24px;padding:26px;
+  box-shadow:0 30px 80px rgba(0,0,0,.45);
+}
+.main-card{transform:rotateY(-9deg) rotateX(4deg);animation:tilt 9s ease-in-out infinite}
+@keyframes tilt{
+  0%,100%{transform:rotateY(-9deg) rotateX(4deg) translateY(0)}
+  50%{transform:rotateY(-4deg) rotateX(1deg) translateY(-14px)}
+}
+
+.card-head{display:flex;align-items:center;gap:12px;margin-bottom:26px}
+.card-head .dots{display:flex;gap:6px}
+.card-head .dots i{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.22)}
+.card-head .dots i:nth-child(1){background:#FF5F57}
+.card-head .dots i:nth-child(2){background:#FEBC2E}
+.card-head .dots i:nth-child(3){background:#28C840}
+.card-head span{font-size:12.5px;color:rgba(255,255,255,.5);font-weight:600;letter-spacing:.02em}
+
+.chart{display:flex;align-items:flex-end;gap:11px;height:150px;margin-bottom:24px}
+.chart .bar{
+  flex:1;border-radius:7px 7px 3px 3px;
+  background:linear-gradient(180deg,#06B6D4,#4F46E5);
+  height:var(--h);opacity:.85;
+  animation:grow 1.2s var(--ease) backwards;
+  transform-origin:bottom;
+}
+@keyframes grow{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+.chart .bar:nth-child(1){animation-delay:.1s}
+.chart .bar:nth-child(2){animation-delay:.2s}
+.chart .bar:nth-child(3){animation-delay:.3s}
+.chart .bar:nth-child(4){animation-delay:.4s}
+.chart .bar:nth-child(5){animation-delay:.5s}
+.chart .bar:nth-child(6){animation-delay:.6s}
+.chart .bar:nth-child(7){animation-delay:.7s}
+
+.card-foot{display:flex;gap:14px}
+.card-foot>div{
+  flex:1;padding:14px;border-radius:14px;
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);
+}
+.card-foot strong{display:block;font-size:19px;font-weight:800;letter-spacing:-.02em}
+.card-foot span{font-size:11.5px;color:rgba(255,255,255,.45);font-weight:600}
+
+.float-card{
+  position:absolute;display:flex;align-items:center;gap:10px;
+  padding:13px 18px;border-radius:14px;
+  background:rgba(255,255,255,.95);color:var(--text);
+  font-size:13.5px;font-weight:700;
+  box-shadow:0 20px 50px rgba(0,0,0,.3);
+  white-space:nowrap;
+}
+.float-card .ic{
+  width:30px;height:30px;border-radius:9px;display:grid;place-items:center;
+  font-size:14px;background:var(--grad-soft);color:var(--primary);
+}
+.fc-1{top:-22px;left:-34px;animation:bob 5s ease-in-out infinite}
+.fc-2{bottom:-20px;right:-26px;animation:bob 5s ease-in-out infinite .8s}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-13px)}}
+
+/* ============================================
+   LOGO STRIP
+   ============================================ */
+.logo-strip{
+  padding:44px 0;border-bottom:1px solid var(--border);
+  background:var(--bg);
+}
+.logo-strip p{
+  text-align:center;font-size:13px;font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;color:#9AA1B5;margin-bottom:30px;
+}
+.logo-row{
+  display:flex;align-items:center;justify-content:center;
+  gap:56px;flex-wrap:wrap;
+}
+.logo-row span{
+  font-size:20px;font-weight:800;letter-spacing:-.03em;
+  color:#B6BCD0;transition:color .3s;cursor:default;
+}
+.logo-row span:hover{color:var(--text)}
+
+/* ============================================
+   ABOUT
+   ============================================ */
+.about-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:80px;align-items:center;
+}
+.about-visual{position:relative}
+.about-img{
+  border-radius:26px;overflow:hidden;box-shadow:var(--shadow-lg);
+  aspect-ratio:4/4.4;background:var(--grad);
+}
+.about-img img{width:100%;height:100%;object-fit:cover}
+
+.about-badge{
+  position:absolute;bottom:-28px;right:-28px;
+  background:#fff;border-radius:20px;padding:24px 28px;
+  box-shadow:var(--shadow-lg);border:1px solid var(--border);
+  display:flex;align-items:center;gap:16px;
+}
+.about-badge .num{
+  font-size:40px;font-weight:800;letter-spacing:-.04em;
+  background:var(--grad);-webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;line-height:1;
+}
+.about-badge .txt{font-size:13px;color:var(--muted);font-weight:600;line-height:1.35;max-width:110px}
+
+.about-content h2{font-size:clamp(28px,3.6vw,42px);margin-bottom:22px}
+.about-content>p{color:var(--muted);font-size:16.5px;margin-bottom:20px}
+
+.feature-list{margin-top:36px;display:flex;flex-direction:column;gap:24px}
+.feature-item{display:flex;gap:18px}
+.feature-icon{
+  flex-shrink:0;width:48px;height:48px;border-radius:14px;
+  background:var(--grad-soft);display:grid;place-items:center;
+  color:var(--primary);transition:all .4s var(--ease);
+}
+.feature-item:hover .feature-icon{background:var(--grad);color:#fff;transform:rotate(-6deg) scale(1.06)}
+.feature-item h4{font-size:16.5px;margin-bottom:5px}
+.feature-item p{font-size:14.5px;color:var(--muted);line-height:1.6}
+
+/* ============================================
+   SERVICES
+   ============================================ */
+.services-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:26px;
+}
+.service-card{
+  background:#fff;border:1px solid var(--border);border-radius:var(--radius);
+  padding:38px 32px;position:relative;overflow:hidden;
+  transition:all .45s var(--ease);
+}
+.service-card::before{
+  content:'';position:absolute;inset:0;background:var(--grad);
+  opacity:0;transition:opacity .45s var(--ease);
+}
+.service-card>*{position:relative;z-index:2}
+.service-card:hover{transform:translateY(-10px);box-shadow:var(--shadow-lg);border-color:transparent}
+.service-card:hover::before{opacity:1}
+.service-card:hover h3,.service-card:hover p,.service-card:hover .service-link{color:#fff}
+.service-card:hover .service-icon{background:rgba(255,255,255,.16);color:#fff}
+
+.service-icon{
+  width:60px;height:60px;border-radius:17px;
+  background:var(--grad-soft);display:grid;place-items:center;
+  color:var(--primary);margin-bottom:26px;
+  transition:all .45s var(--ease);
+}
+.service-card h3{font-size:19.5px;margin-bottom:12px;transition:color .4s}
+.service-card p{font-size:14.5px;color:var(--muted);line-height:1.7;transition:color .4s}
+.service-link{
+  display:inline-flex;align-items:center;gap:7px;
+  margin-top:22px;font-size:14px;font-weight:700;color:var(--primary);
+  transition:color .4s,gap .3s var(--ease);
+}
+.service-card:hover .service-link{gap:12px}
+
+/* ============================================
+   STATS
+   ============================================ */
+.stats-section{
+  background:var(--dark);color:#fff;padding:90px 0;position:relative;overflow:hidden;
+}
+.stats-section::before{
+  content:'';position:absolute;width:700px;height:700px;border-radius:50%;
+  background:#4F46E5;filter:blur(160px);opacity:.28;
+  top:-350px;left:50%;transform:translateX(-50%);
+}
+.stats-grid{
+  position:relative;z-index:2;
+  display:grid;grid-template-columns:repeat(4,1fr);gap:30px;
+  text-align:center;
+}
+.stat-box .counter{
+  font-size:clamp(38px,5vw,56px);font-weight:800;letter-spacing:-.04em;
+  background:linear-gradient(135deg,#fff 20%,#A5B4FC 100%);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  line-height:1.1;margin-bottom:8px;
+}
+.stat-box p{font-size:14.5px;color:rgba(255,255,255,.55);font-weight:600}
+
+/* ============================================
+   PORTFOLIO
+   ============================================ */
+.portfolio-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:24px;
+}
+.portfolio-item{
+  position:relative;border-radius:var(--radius);overflow:hidden;
+  aspect-ratio:1/1.05;background:var(--grad);cursor:pointer;
+  box-shadow:var(--shadow-sm);
+}
+.portfolio-item img{
+  width:100%;height:100%;object-fit:cover;
+  transition:transform .8s var(--ease),filter .5s;
+}
+.portfolio-item:hover img{transform:scale(1.09)}
+.portfolio-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(7,11,30,.94) 0%,rgba(7,11,30,.55) 40%,transparent 72%);
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:28px;color:#fff;
+}
+.portfolio-overlay .cat{
+  font-size:11.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:#67E8F9;margin-bottom:8px;
+}
+.portfolio-overlay h3{font-size:19px;margin-bottom:6px}
+.portfolio-overlay p{
+  font-size:13.5px;color:rgba(255,255,255,.6);
+  max-height:0;opacity:0;overflow:hidden;
+  transition:all .45s var(--ease);
+}
+.portfolio-item:hover .portfolio-overlay p{max-height:60px;opacity:1;margin-top:4px}
+.portfolio-overlay .arrow{
+  position:absolute;top:24px;right:24px;
+  width:42px;height:42px;border-radius:50%;
+  background:rgba(255,255,255,.14);backdrop-filter:blur(10px);
+  display:grid;place-items:center;color:#fff;
+  opacity:0;transform:translateY(-8px) scale(.8);
+  transition:all .45s var(--ease);
+}
+.portfolio-item:hover .arrow{opacity:1;transform:none}
+
+/* ============================================
+   PROCESS
+   ============================================ */
+.process-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:24px;position:relative;
+}
+.process-grid::before{
+  content:'';position:absolute;top:38px;left:11%;right:11%;height:2px;
+  background:linear-gradient(90deg,rgba(79,70,229,.15),rgba(6,182,212,.5),rgba(79,70,229,.15));
+  z-index:0;
+}
+.process-step{position:relative;z-index:1;text-align:center}
+.step-num{
+  width:76px;height:76px;border-radius:24px;margin:0 auto 26px;
+  background:#fff;border:1.5px solid var(--border);
+  display:grid;place-items:center;
+  font-size:22px;font-weight:800;color:var(--primary);
+  box-shadow:var(--shadow-sm);
+  transition:all .45s var(--ease);
+}
+.process-step:hover .step-num{
+  background:var(--grad);color:#fff;border-color:transparent;
+  transform:translateY(-6px) rotate(-5deg);
+  box-shadow:0 16px 36px rgba(79,70,229,.35);
+}
+.process-step h4{font-size:17px;margin-bottom:10px}
+.process-step p{font-size:14px;color:var(--muted);line-height:1.65;max-width:230px;margin:0 auto}
+
+/* ============================================
+   TESTIMONIALS
+   ============================================ */
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.testi-card{
+  background:rgba(255,255,255,.045);
+  border:1px solid rgba(255,255,255,.09);
+  border-radius:var(--radius);padding:36px 32px;
+  transition:all .45s var(--ease);
+}
+.testi-card:hover{
+  background:rgba(255,255,255,.075);
+  border-color:rgba(165,180,252,.35);
+  transform:translateY(-8px);
+}
+.stars{display:flex;gap:3px;margin-bottom:20px;color:#FBBF24;font-size:15px}
+.testi-card blockquote{
+  font-size:15.5px;line-height:1.75;color:rgba(255,255,255,.82);
+  margin-bottom:28px;font-weight:500;
+}
+.testi-author{display:flex;align-items:center;gap:14px}
+.avatar{
+  width:48px;height:48px;border-radius:50%;flex-shrink:0;
+  display:grid;place-items:center;color:#fff;font-weight:800;font-size:16px;
+}
+.testi-author strong{display:block;font-size:15px;font-weight:700}
+.testi-author span{font-size:13px;color:rgba(255,255,255,.45)}
+
+/* ============================================
+   CTA BANNER
+   ============================================ */
+.cta-section{padding:0 0 110px}
+.cta-box{
+  background:var(--grad);border-radius:32px;padding:70px 60px;
+  text-align:center;position:relative;overflow:hidden;
+  box-shadow:0 40px 90px rgba(79,70,229,.35);
+}
+.cta-box::before{
+  content:'';position:absolute;width:600px;height:600px;border-radius:50%;
+  background:rgba(255,255,255,.12);top:-300px;right:-150px;
+}
+.cta-box::after{
+  content:'';position:absolute;width:400px;height:400px;border-radius:50%;
+  background:rgba(255,255,255,.08);bottom:-220px;left:-100px;
+}
+.cta-box>*{position:relative;z-index:2}
+.cta-box h2{font-size:clamp(28px,4vw,44px);color:#fff;margin-bottom:18px}
+.cta-box p{color:rgba(255,255,255,.82);font-size:17px;max-width:560px;margin:0 auto 36px}
+.cta-box .btn{background:#fff;color:var(--primary);box-shadow:0 14px 40px rgba(0,0,0,.2)}
+.cta-box .btn:hover{transform:translateY(-4px);box-shadow:0 22px 54px rgba(0,0,0,.28)}
+
+/* ============================================
+   CONTACT
+   ============================================ */
+.contact-grid{
+  display:grid;grid-template-columns:.9fr 1.1fr;gap:64px;align-items:start;
+}
+.contact-info h2{font-size:clamp(28px,3.6vw,40px);margin-bottom:18px}
+.contact-info>p{color:var(--muted);font-size:16px;margin-bottom:40px}
+
+.info-list{display:flex;flex-direction:column;gap:16px}
+.info-item{
+  display:flex;gap:18px;align-items:flex-start;
+  padding:22px;border-radius:var(--radius-sm);
+  background:#fff;border:1px solid var(--border);
+  transition:all .4s var(--ease);
+}
+.info-item:hover{border-color:rgba(79,70,229,.35);box-shadow:var(--shadow-md);transform:translateX(5px)}
+.info-item .ic{
+  width:46px;height:46px;border-radius:13px;flex-shrink:0;
+  background:var(--grad-soft);display:grid;place-items:center;color:var(--primary);
+}
+.info-item strong{display:block;font-size:14.5px;margin-bottom:3px}
+.info-item span{font-size:14px;color:var(--muted)}
+
+.contact-form{
+  background:#fff;border:1px solid var(--border);border-radius:26px;
+  padding:44px;box-shadow:var(--shadow-md);
+}
+.contact-form h3{font-size:23px;margin-bottom:8px}
+.contact-form .sub{font-size:14.5px;color:var(--muted);margin-bottom:30px}
+
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.field{margin-bottom:18px;display:flex;flex-direction:column;gap:8px}
+.field label{font-size:13.5px;font-weight:700;color:var(--text)}
+.field input,.field select,.field textarea{
+  width:100%;padding:14px 17px;border-radius:12px;
+  border:1.5px solid var(--border);background:var(--bg-soft);
+  font-family:inherit;font-size:14.5px;color:var(--text);
+  transition:all .3s var(--ease);outline:none;resize:vertical;
+}
+.field input:focus,.field select:focus,.field textarea:focus{
+  border-color:var(--primary);background:#fff;
+  box-shadow:0 0 0 4px rgba(79,70,229,.1);
+}
+.field input::placeholder,.field textarea::placeholder{color:#A0A7BA}
+.contact-form .btn{width:100%;margin-top:8px}
+
+.form-note{
+  display:none;margin-top:18px;padding:14px 18px;border-radius:12px;
+  background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.3);
+  color:#059669;font-size:14px;font-weight:600;text-align:center;
+}
+.form-note.show{display:block;animation:fadeUp .5s var(--ease)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+.footer{background:var(--dark);color:rgba(255,255,255,.6);padding:80px 0 0;position:relative;overflow:hidden}
+.footer::before{
+  content:'';position:absolute;width:800px;height:400px;border-radius:50%;
+  background:#4F46E5;filter:blur(180px);opacity:.16;bottom:-200px;left:50%;transform:translateX(-50%);
+}
+.footer-grid{
+  position:relative;z-index:2;
+  display:grid;grid-template-columns:1.6fr 1fr 1fr 1.2fr;gap:48px;
+  padding-bottom:60px;
+}
+.footer-brand .logo{margin-bottom:20px}
+.footer-brand .logo-text{color:#fff}
+.footer-brand p{font-size:14.5px;line-height:1.75;max-width:290px;margin-bottom:26px}
+
+.socials{display:flex;gap:11px}
+.socials a{
+  width:40px;height:40px;border-radius:11px;
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);
+  display:grid;place-items:center;color:rgba(255,255,255,.7);
+  transition:all .35s var(--ease);
+}
+.socials a:hover{background:var(--grad);color:#fff;border-color:transparent;transform:translateY(-4px)}
+
+.footer-col h4{color:#fff;font-size:15px;margin-bottom:22px;font-weight:700}
+.footer-col ul{display:flex;flex-direction:column;gap:13px}
+.footer-col a{font-size:14.5px;transition:all .3s;display:inline-block}
+.footer-col a:hover{color:#fff;transform:translateX(4px)}
+
+.footer-news p{font-size:14.5px;margin-bottom:18px;line-height:1.7}
+.news-form{display:flex;gap:9px}
+.news-form input{
+  flex:1;padding:13px 17px;border-radius:11px;
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);
+  color:#fff;font-family:inherit;font-size:14px;outline:none;transition:all .3s;
+  min-width:0;
+}
+.news-form input::placeholder{color:rgba(255,255,255,.35)}
+.news-form input:focus{border-color:rgba(165,180,252,.6);background:rgba(255,255,255,.09)}
+.news-form button{
+  padding:0 20px;border-radius:11px;background:var(--grad);
+  color:#fff;font-weight:700;font-size:14px;transition:all .35s var(--ease);
+}
+.news-form button:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(79,70,229,.45)}
+
+.footer-bottom{
+  position:relative;z-index:2;
+  border-top:1px solid rgba(255,255,255,.09);
+  padding:26px 0;display:flex;align-items:center;justify-content:space-between;
+  gap:20px;flex-wrap:wrap;font-size:13.5px;
+}
+.footer-bottom .links{display:flex;gap:26px}
+.footer-bottom a:hover{color:#fff}
+
+/* ============================================
+   BACK TO TOP
+   ============================================ */
+.to-top{
+  position:fixed;bottom:28px;right:28px;z-index:900;
+  width:50px;height:50px;border-radius:50%;
+  background:var(--grad);color:#fff;
+  display:grid;place-items:center;
+  box-shadow:0 12px 32px rgba(79,70,229,.4);
+  opacity:0;visibility:hidden;transform:translateY(16px);
+  transition:all .4s var(--ease);
+}
+.to-top.show{opacity:1;visibility:visible;transform:none}
+.to-top:hover{transform:translateY(-4px) scale(1.06)}
+
+/* ============================================
+   SCROLL REVEAL
+   ============================================ */
+.reveal{
+  opacity:0;transform:translateY(34px);
+  transition:opacity .8s var(--ease),transform .8s var(--ease);
+}
+.reveal.in{opacity:1;transform:none}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width:1080px){
+  .services-grid,.portfolio-grid,.testi-grid{grid-template-columns:repeat(2,1fr)}
+  .stats-grid{grid-template-columns:repeat(2,1fr);gap:44px}
+  .process-grid{grid-template-columns:repeat(2,1fr);gap:44px}
+  .process-grid::before{display:none}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:40px}
+}
+
+@media (max-width:960px){
+  .menu-toggle{display:flex}
+  .nav{
+    position:fixed;top:0;right:0;height:100vh;width:min(330px,84vw);
+    background:#fff;flex-direction:column;align-items:stretch;
+    padding:100px 30px 40px;gap:0;
+    transform:translateX(100%);
+    transition:transform .45s var(--ease);
+    box-shadow:-24px 0 70px rgba(11,16,32,.18);
+    z-index:999;
+  }
+  .nav.open{transform:none}
+  .nav a{
+    color:var(--text) !important;font-size:16px;
+    padding:16px 0;border-bottom:1px solid var(--border);width:100%;
+  }
+  .nav a::after{display:none}
+  .nav-cta{
+    margin-top:24px;justify-content:center;color:#fff !important;
+    border-bottom:none !important;padding:15px 24px;
+  }
+
+  .hero{padding:140px 0 90px}
+  .hero-inner{grid-template-columns:1fr;gap:70px}
+  .hero-content{max-width:100%}
+  .hero-visual{max-width:460px;margin:0 auto;width:100%}
+  .fc-1{left:-16px}
+  .fc-2{right:-12px}
+
+  .about-grid{grid-template-columns:1fr;gap:70px}
+  .about-img{aspect-ratio:16/11}
+  .about-badge{right:0;bottom:-24px}
+
+  .contact-grid{grid-template-columns:1fr;gap:48px}
+  .cta-box{padding:56px 32px;border-radius:26px}
+}
+
+@media (max-width:680px){
+  .section{padding:80px 0}
+  .container{padding:0 20px}
+  .services-grid,.portfolio-grid,.testi-grid,.process-grid{grid-template-columns:1fr}
+  .stats-grid{grid-template-columns:1fr 1fr;gap:36px}
+  .hero-stats{gap:30px}
+  .hero-stats .stat strong{font-size:24px}
+  .hero-actions .btn{flex:1;justify-content:center}
+  .footer-grid{grid-template-columns:1fr;gap:36px}
+  .form-row{grid-template-columns:1fr}
+  .contact-form{padding:30px 24px}
+  .footer-bottom{justify-content:center;text-align:center}
+  .logo-row{gap:32px}
+  .logo-row span{font-size:17px}
+  .about-badge{padding:18px 22px;right:-6px}
+  .about-badge .num{font-size:32px}
+  .to-top{bottom:20px;right:20px;width:46px;height:46px}
+  .cta-section{padding-bottom:80px}
+}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms !important;transition-duration:.01ms !important}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header class="header" id="header">
+  <div class="container nav-inner">
+    <a href="#home" class="logo">
+      <span class="logo-mark">N</span>
+      <span class="logo-text">Nexora<span class="dot">.</span></span>
+    </a>
+
+    <nav class="nav" id="nav">
+      <a href="#tentang">Tentang</a>
+      <a href="#layanan">Layanan</a>
+      <a href="#portofolio">Portofolio</a>
+      <a href="#proses">Proses</a>
+      <a href="#testimoni">Testimoni</a>
+      <a href="#kontak" class="nav-cta">Hubungi Kami</a>
+    </nav>
+
+    <button class="menu-toggle" id="menuToggle" aria-label="Buka menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="home">
+  <div class="hero-bg">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+    <div class="grid-overlay"></div>
+  </div>
+
+  <div class="container hero-inner">
+    <div class="hero-content">
+      <div class="badge"><span class="pulse"></span> Dipercaya oleh 500+ perusahaan</div>
+
+      <h1>Wujudkan <span class="grad-text">Transformasi Digital</span> Bisnis Anda</h1>
+
+      <p class="lead">
+        Kami membantu perusahaan merancang, membangun, dan mengembangkan produk digital
+        yang berdampak nyata — dari strategi hingga peluncuran.
+      </p>
+
+      <div class="hero-actions">
+        <a href="#kontak" class="btn btn-primary btn-lg">
+          Mulai Konsultasi
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a href="#portofolio" class="btn btn-ghost btn-lg">Lihat Portofolio</a>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat"><strong>250+</strong><span>Proyek Selesai</span></div>
+        <div class="stat"><strong>12+</strong><span>Tahun Pengalaman</span></div>
+        <div class="stat"><strong>98%</strong><span>Kepuasan Klien</span></div>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="glass-card main-card">
+        <div class="card-head">
+          <div class="dots"><i></i><i></i><i></i></div>
+          <span>Performance Dashboard</span>
+        </div>
+        <div class="chart">
+          <div class="bar" style="--h:38%"></div>
+          <div class="bar" style="--h:62%"></div>
+          <div class="bar" style="--h:48%"></div>
+          <div class="bar" style="--h:82%"></div>
+          <div class="bar" style="--h:66%"></div>
+          <div class="bar" style="--h:94%"></div>
+          <div class="bar" style="--h:74%"></div>
+        </div>
+        <div class="card-foot">
+          <div><strong>+128%</strong><span>Pertumbuhan</span></div>
+          <div><strong>4.9 / 5</strong><span>Rating Klien</span></div>
+        </div>
+      </div>
+
+      <div class="float-card fc-1"><span class="ic">✓</span> Proyek Tepat Waktu</div>
+      <div class="float-card fc-2"><span class="ic">⚡</span> Support 24/7</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LOGO STRIP ============ -->
+<div class="logo-strip">
+  <div class="container">
+    <p>Dipercaya oleh tim hebat di berbagai industri</p>
+    <div class="logo-row">
+      <span>Vertex</span>
+      <span>Lumina</span>
+      <span>Orbitpay</span>
+      <span>Kanso</span>
+      <span>Northline</span>
+      <span>Byteform</span>
+    </div>
+  </div>
+</div>
+
+<!-- ============ ABOUT ============ -->
+<section class="section" id="tentang">
+  <div class="container about-grid">
+    <div class="about-visual reveal">
+      <div class="about-img">
+        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=900&q=80" alt="Tim Nexora berkolaborasi">
+      </div>
+      <div class="about-badge">
+        <div class="num">12+</div>
+        <div class="txt">Tahun membangun produk digital</div>
+      </div>
+    </div>
+
+    <div class="about-content reveal">
+      <div class="eyebrow">Tentang Kami</div>
+      <h2>Partner digital yang tumbuh bersama bisnis Anda</h2>
+      <p>
+        Nexora adalah agensi transformasi digital yang berfokus pada hasil. Sejak 2013,
+        kami telah membantu lebih dari 500 perusahaan dari startup tahap awal hingga
+        korporasi — untuk merancang dan membangun produk digital yang dicintai pengguna.
+      </p>
+      <p>
+        Kami percaya teknologi terbaik adalah yang sederhana, terukur, dan benar-benar
+        menyelesaikan masalah nyata. Itulah pendekatan yang kami bawa ke setiap proyek.
+      </p>
+
+      <div class="feature-list">
+        <div class="feature-item">
+          <div class="feature-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          </div>
+          <div>
+            <h4>Tim Multidisiplin</h4>
+            <p>Strategist, desainer, engineer, dan marketer bekerja dalam satu tim yang solid.</p>
+          </div>
+        </div>
+
+        <div class="feature-item">
+          <div class="feature-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+          </div>
+          <div>
+            <h4>Berorientasi Hasil</h4>
+            <p>Setiap keputusan desain dan teknis diukur dengan metrik bisnis yang jelas.</p>
+          </div>
+        </div>
+
+        <div class="feature-item">
+          <div class="feature-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.6 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          </div>
+          <div>
+            <h4>Teknologi Terkini</h4>
+            <p>Stack modern yang scalable, aman, dan mudah dirawat dalam jangka panjang.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SERVICES ============ -->
+<section class="section section-soft" id="layanan">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">Layanan Kami</div>
+      <h2>Solusi lengkap untuk kebutuhan digital Anda</h2>
+      <p>Dari ide hingga peluncuran — kami menangani seluruh siklus hidup produk digital Anda.</p>
+    </div>
+
+    <div class="services-grid">
+      <article class="service-card reveal">
+        <div class="service-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/></svg>
+        </div>
+        <h3>Web Development</h3>
+        <p>Website dan aplikasi web berperforma tinggi dengan arsitektur modern, SEO-friendly, dan siap skala.</p>
+        <span class="service-link">Pelajari lebih lanjut →</span>
+      </article>
+
+      <article class="service-card reveal">
+        <div class="service-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2.5"/><path d="M12 18h.01"/></svg>
+        </div>
+        <h3>Mobile App</h3>
+        <p>Aplikasi iOS & Android native maupun cross-platform yang cepat, mulus, dan disukai pengguna.</p>
+        <span class="service-link">Pelajari lebih lanjut →</span>
+      </article>
+
+      <article class="service-card reveal">
+        <div class="service-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg>
+        </div>
+        <h3>UI/UX Design</h3>
+        <p>Riset pengguna, wireframe, prototipe, hingga design system yang konsisten dan mudah dikembangkan.</p>
+        <span class="service-link">Pelajari lebih lanjut →</span>
+      </article>
+
+      <article class="service-card reveal">
+        <div class="service-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 6l-9.5 9.5-5-5L1 18"/><path d="M17 6h6v6"/></svg>
+        </div>
+        <h3>Digital Marketing</h3>
+        <p>Strategi SEO, performance ads, dan content marketing yang mendatangkan traffic serta konversi nyata.</p>
+        <span class="service-link">Pelajari lebih lanjut →</span>
+      </article>
+
+      <article class="service-card reveal">
+        <div class="service-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>
+        </div>
+        <h3>Cloud &amp; DevOps</h3>
+        <p>Infrastruktur cloud yang andal, otomasi deployment, monitoring, dan keamanan tingkat enterprise.</p>
+        <span class="service-link">Pelajari lebih lanjut →</span>
+      </article>
+
+      <article class="service-card reveal">
+        <div class="service-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h3>Konsultasi IT</h3>
+        <p>Audit sistem, roadmap teknologi, dan pendampingan tim internal untuk transformasi yang terarah.</p>
+        <span class="service-link">Pelajari lebih lanjut →</span>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STATS ============ -->
+<section class="stats-section">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-box reveal">
+        <div class="counter" data-target="250" data-suffix="+">0</div>
+        <p>Proyek Berhasil</p>
+      </div>
+      <div class="stat-box reveal">
+        <div class="counter" data-target="500" data-suffix="+">0</div>
+        <p>Klien Aktif</p>
+      </div>
+      <div class="stat-box reveal">
+        <div class="counter" data-target="45" data-suffix="+">0</div>
+        <p>Anggota Tim</p>
+      </div>
+      <div class="stat-box reveal">
+        <div class="counter" data-target="98" data-suffix="%">0</div>
+        <p>Tingkat Kepuasan</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PORTFOLIO ============ -->
+<section class="section" id="portofolio">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">Portofolio</div>
+      <h2>Karya yang berbicara lebih keras</h2>
+      <p>Beberapa proyek pilihan yang kami banggakan bersama klien kami.</p>
+    </div>
+
+    <div class="portfolio-grid">
+      <article class="portfolio-item reveal">
+        <img src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?auto=format&fit=crop&w=800&q=80" alt="Proyek Orbitpay">
+        <div class="portfolio-overlay">
+          <span class="cat">Fintech · Web App</span>
+          <h3>Orbitpay Dashboard</h3>
+          <p>Platform pembayaran B2B dengan 120.000+ transaksi harian.</p>
+          <div class="arrow">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
+          </div>
+        </div>
+      </article>
+
+      <article class="portfolio-item reveal">
+        <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?auto=format&fit=crop&w=800&q=80" alt="Proyek Kanso Mobile">
+        <div class="portfolio-overlay">
+          <span class="cat">E-Commerce · Mobile</span>
+          <h3>Kanso Commerce App</h3>
+          <p>Aplikasi belanja dengan peningkatan konversi 68% dalam 6 bulan.</p>
+          <div class="arrow">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
+          </div>
+        </div>
+      </article>
+
+      <article class="portfolio-item reveal">
+        <img src="https://images.unsplash.com/photo-1559028012-481c04fa702d?auto=format&fit=crop&w=800&q=80" alt="Proyek Lumina Design">
+        <div class="portfolio-overlay">
+          <span class="cat">SaaS · UI/UX Design</span>
+          <h3>Lumina Analytics</h3>
+          <p>Redesign design system untuk platform analitik dengan 40+ modul.</p>
+          <div class="arrow">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
+          </div>
+        </div>
+      </article>
+
+      <article class="portfolio-item reveal">
+        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80" alt="Proyek Northline">
+        <div class="portfolio-overlay">
+          <span class="cat">Logistics · Web Platform</span>
+          <h3>Northline Tracking</h3>
+          <p>Sistem pelacakan rantai pasok real-time untuk 12 negara.</p>
+          <div class="arrow">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
+          </div>
+        </div>
+      </article>
+
+      <article class="portfolio-item reveal">
+        <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80" alt="Proyek Byteform Cloud">
+        <div class="portfolio-overlay">
+          <span class="cat">Enterprise · Cloud</span>
+          <h3>Byteform Cloud Suite</h3>
+          <p>Migrasi infrastruktur ke cloud dengan uptime 99,99%.</p>
+          <div class="arrow">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
+          </div>
+        </div>
+      </article>
+
+      <article class="portfolio-item reveal">
+        <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=800&q=80" alt="Proyek Vertex">
+        <div class="portfolio-overlay">
+          <span class="cat">Healthtech · Product</span>
+          <h3>Vertex Health Portal</h3>
+          <p>Portal pasien terintegrasi yang melayani 300.000+ pengguna.</p>
+          <div class="arrow">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROCESS ============ -->
+<section class="section section-soft" id="proses">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">Cara Kerja Kami</div>
+      <h2>Proses yang transparan, hasil yang terukur</h2>
+      <p>Empat tahap sederhana yang membawa ide Anda menjadi produk digital siap pasar.</p>
+    </div>
+
+    <div class="process-grid">
+      <div class="process-step reveal">
+        <div class="step-num">01</div>
+        <h4>Discovery</h4>
+        <p>Kami mendalami bisnis, pengguna, dan tujuan Anda untuk menyusun strategi yang tepat.</p>
+      </div>
+      <div class="process-step reveal">
+        <div class="step-num">02</div>
+        <h4>Design</h4>
+        <p>Wireframe, prototipe interaktif, dan design system yang siap divalidasi bersama pengguna.</p>
+      </div>
+      <div class="process-step reveal">
+        <div class="step-num">03</div>
+        <h4>Build</h4>
+        <p>Pengembangan agile dengan sprint mingguan, demo berkala, dan pengujian berkelanjutan.</p>
+      </div>
+      <div class="process-step reveal">
+        <div class="step-num">04</div>
+        <h4>Launch &amp; Grow</h4>
+        <p>Peluncuran, monitoring, serta iterasi berbasis data untuk pertumbuhan berkelanjutan.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TESTIMONIALS ============ -->
+<section class="section section-dark" id="testimoni">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">Testimoni</div>
+      <h2>Kata mereka yang telah bekerja dengan kami</h2>
+      <p>Kepuasan klien adalah metrik terpenting bagi kami.</p>
+    </div>
+
+    <div class="testi-grid">
+      <div class="testi-card reveal">
+        <div class="stars">★★★★★</div>
+        <blockquote>
+          "Nexora bukan sekadar vendor — mereka benar-benar memahami bisnis kami.
+          Peluncuran platform baru berjalan tepat waktu dan konversi kami naik 68%."
+        </blockquote>
+        <div class="testi-author">
+          <div class="avatar" style="background:linear-gradient(135deg,#4F46E5,#7C3AED)">AR</div>
+          <div>
+            <strong>Andini Rahmawati</strong>
+            <span>Head of Product, Kanso</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card reveal">
+        <div class="stars">★★★★★</div>
+        <blockquote>
+          "Timnya sangat responsif dan detail. Komunikasi transparan sepanjang proyek,
+          dan hasil akhirnya melampaui ekspektasi kami."
+        </blockquote>
+        <div class="testi-author">
+          <div class="avatar" style="background:linear-gradient(135deg,#06B6D4,#4F46E5)">BS</div>
+          <div>
+            <strong>Budi Santoso</strong>
+            <span>CTO, Orbitpay</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card reveal">
+        <div class="stars">★★★★★</div>
+        <blockquote>
+          "Migrasi sistem kami ke cloud berjalan mulus tanpa downtime. Dukungan pasca
+          peluncuran juga sangat memuaskan."
+        </blockquote>
+        <div class="testi-author">
+          <div class="avatar" style="background:linear-gradient(135deg,#7C3AED,#06B6D4)">MC</div>
+          <div>
+            <strong>Maria Chen</strong>
+            <span>VP Engineering, Byteform</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA ============ -->
+<section class="cta-section">
+  <div class="container">
+    <div class="cta-box reveal">
+      <h2>Siap memulai proyek digital Anda?</h2>
+      <p>Konsultasi gratis selama 30 menit untuk memetakan kebutuhan dan peluang bisnis Anda.</p>
+      <a href="#kontak" class="btn btn-lg">Jadwalkan Konsultasi Gratis</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="section section-soft" id="kontak">
+  <div class="container contact-grid">
+    <div class="contact-info reveal">
+      <div class="eyebrow">Hubungi Kami</div>
+      <h2>Mari bicarakan ide Anda</h2>
+      <p>Tim kami siap mendengarkan dan membantu menemukan solusi terbaik untuk kebutuhan bisnis Anda.</p>
+
+      <div class="info-list">
+        <div class="info-item">
+          <div class="ic">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg>
+          </div>
+          <div>
+            <strong>Email</strong>
+            <span>hello@nexora.id</span>
+          </div>
+        </div>
+
+        <div class="info-item">
+          <div class="ic">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+          <div>
+            <strong>Telepon</strong>
+            <span>+62 21 5000 1234</span>
+          </div>
+        </div>
+
+        <div class="info-item">
+          <div class="ic">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div>
+            <strong>Kantor</strong>
+            <span>Jl. Sudirman Kav. 52, Jakarta Selatan 12190</span>
+          </div>
+        </div>
+
+        <div class="info-item">
+          <div class="ic">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          </div>
+          <div>
+            <strong>Jam Operasional</strong>
+            <span>Senin – Jumat, 09.00 – 18.00 WIB</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-form reveal">
+      <h3>Kirim Pesan</h3>
+      <p class="sub">Isi formulir di bawah ini, kami akan merespons dalam 1×24 jam kerja.</p>
+
+      <form id="contactForm" novalidate>
+        <div class="form-row">
+          <div class="field">
+            <label for="nama">Nama Lengkap</label>
+            <input type="text" id="nama" placeholder="Nama Anda" required>
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="nama@perusahaan.com" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="field">
+            <label for="telepon">No. Telepon</label>
+            <input type="tel" id="telepon" placeholder="+62 812 3456 7890">
+          </div>
+          <div class="field">
+            <label for="layanan">Layanan</label>
+            <select id="layanan">
+              <option value="">Pilih layanan</option>
+              <option>Web Development</option>
+              <option>Mobile App</option>
+              <option>UI/UX Design</option>
+              <option>Digital Marketing</option>
+              <option>Cloud &amp; DevOps</option>
+              <option>Konsultasi IT</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="pesan">Pesan</label>
+          <textarea id="pesan" rows="4" placeholder="Ceritakan singkat tentang proyek Anda..." required></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-lg">Kirim Pesan</button>
+        <div class="form-note" id="formNote">✓ Terima kasih! Pesan Anda telah terkirim. Kami akan segera menghubungi Anda.</div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#home" class="logo">
+          <span class="logo-mark">N</span>
+          <span class="logo-text">Nexora<span class="dot">.</span></span>
+        </a>
+        <p>Agensi transformasi digital yang membantu bisnis tumbuh melalui teknologi dan desain yang berdampak.</p>
+        <div class="socials">
+          <a href="#" aria-label="LinkedIn">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14zM8.34 18.34V9.99H5.66v8.35h2.68zM7 8.83a1.55 1.55 0 1 0 0-3.1 1.55 1.55 0 0 0 0 3.1zm11.34 9.51v-4.58c0-2.45-1.31-3.59-3.06-3.59a2.64 2.64 0 0 0-2.39 1.32h-.04V9.99h-2.57v8.35h2.68v-4.13c0-1.09.21-2.14 1.55-2.14 1.33 0 1.35 1.24 1.35 2.21v4.06h2.48z"/></svg>
+          </a>
+          <a href="#" aria-label="Instagram">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01" stroke-linecap="round"/></svg>
+          </a>
+          <a href="#" aria-label="Twitter">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M23 4.9c-.8.36-1.67.6-2.58.71a4.5 4.5 0 0 0 1.98-2.48c-.87.51-1.83.89-2.86 1.09a4.49 4.49 0 0 0-7.65 4.09A12.75 12.75 0 0 1 2.64 3.6a4.49 4.49 0 0 0 1.39 5.99c-.73-.02-1.42-.22-2.02-.56v.06a4.49 4.49 0 0 0 3.6 4.4c-.66.18-1.35.2-2.02.08a4.5 4.5 0 0 0 4.19 3.12A9 9 0 0 1 1 18.57 12.7 12.7 0 0 0 7.88 20.6c8.26 0 12.78-6.84 12.78-12.77l-.01-.58A9.1 9.1 0 0 0 23 4.9z"/></svg>
+          </a>
+          <a href="#" aria-label="Dribbble">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72M2.4 9.5c5.5 0 11.5-.5 15.5-3.5M21.7 14.2c-5.5-1.5-11 0-14.5 3"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Perusahaan</h4>
+        <ul>
+          <li><a href="#tentang">Tentang Kami</a></li>
+          <li><a href="#proses">Cara Kerja</a></li>
+          <li><a href="#">Karier</a></li>
+          <li><a href="#">Blog</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Layanan</h4>
+        <ul>
+          <li><a href="#layanan">Web Development</a></li>
+          <li><a href="#layanan">Mobile App</a></li>
+          <li><a href="#layanan">UI/UX Design</a></li>
+          <li><a href="#layanan">Digital Marketing</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col footer-news">
+        <h4>Newsletter</h4>
+        <p>Dapatkan insight seputar teknologi dan bisnis digital, langsung di inbox Anda.</p>
+        <form class="news-form" id="newsForm">
+          <input type="email" placeholder="Email Anda" required>
+          <button type="submit">Kirim</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2025 Nexora Digital. Seluruh hak cipta dilindungi.</span>
+      <div class="links">
+        <a href="#">Kebijakan Privasi</a>
+        <a href="#">Syarat &amp; Ketentuan</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- BACK TO TOP -->
+<button class="to-top" id="toTop" aria-label="Kembali ke atas">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
+
+<script>
+/* ============================================
+   HEADER SCROLL STATE
+   ============================================ */
+const header = document.getElementById('header');
+const toTop = document.getElementById('toTop');
+
+function onScroll(){
+  const y = window.scrollY;
+  header.classList.toggle('scrolled', y > 40);
+  toTop.classList.toggle('show', y > 600);
+}
+window.addEventListener('scroll', onScroll, { passive: true });
+onScroll();
+
+/* ============================================
+   MOBILE MENU
+   ============================================ */
+const menuToggle = document.getElementById('menuToggle');
+const nav = document.getElementById('nav');
+
+menuToggle.addEventListener('click', () => {
+  const isOpen = nav.classList.toggle('open');
+  menuToggle.classList.toggle('active', isOpen);
+  document.body.classList.toggle('no-scroll', isOpen);
+  menuToggle.setAttribute('aria-expanded', isOpen);
+});
+
+nav.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    nav.classList.remove('open');
+    menuToggle.classList.remove('active');
+    document.body.classList.remove('no-scroll');
+    menuToggle.setAttribute('aria-expanded', 'false');
+  });
+});
+
+/* ============================================
+   SCROLL REVEAL
+   ============================================ */
+const revealEls = document.querySelectorAll('.reveal');
+
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      const el = entry.target;
+      const siblings = Array.from(el.parentElement.children).filter(c => c.classList.contains('reveal'));
+      const idx = siblings.indexOf(el);
+      el.style.transitionDelay = `${Math.min(idx, 6) * 90}ms`;
+      el.classList.add('in');
+      revealObserver.unobserve(el);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+
+revealEls.forEach(el => revealObserver.observe(el));
+
+/* ============================================
+   COUNTER ANIMATION
+   ============================================ */
+const counters = document.querySelectorAll('.counter');
+
+function animateCounter(el){
+  const target = parseInt(el.dataset.target, 10);
+  const suffix = el.dataset.suffix || '';
+  const duration = 1800;
+  const start = performance.now();
+
+  function frame(now){
+    const progress = Math.min((now - start) / duration, 1);
+    // easeOutExpo
+    const eased = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+    el.textContent = Math.round(target * eased) + suffix;
+    if (progress < 1) requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+}
+
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      animateCounter(entry.target);
+      counterObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.5 });
+
+counters.forEach(el => counterObserver.observe(el));
+
+/* ============================================
+   BACK TO TOP
+   ============================================ */
+toTop.addEventListener('click', () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+/* ============================================
+   CONTACT FORM
+   ============================================ */
+const contactForm = document.getElementById('contactForm');
+const formNote = document.getElementById('formNote');
+
+contactForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const nama = document.getElementById('nama').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const pesan = document.getElementById('pesan').value.trim();
+
+  if (!nama || !email || !pesan) {
+    formNote.textContent = '⚠ Mohon lengkapi nama, email, dan pesan Anda.';
+    formNote.style.background = 'rgba(239,68,68,.1)';
+    formNote.style.borderColor = 'rgba(239,68,68,.3)';
+    formNote.style.color = '#DC2626';
+    formNote.classList.add('show');
+    return;
+  }
+
+  formNote.textContent = '✓ Terima kasih! Pesan Anda telah terkirim. Kami akan segera menghubungi Anda.';
+  formNote.style.background = 'rgba(16,185,129,.1)';
+  formNote.style.borderColor = 'rgba(16,185,129,.3)';
+  formNote.style.color = '#059669';
+  formNote.classList.add('show');
+  contactForm.reset();
+});
+
+/* ============================================
+   NEWSLETTER FORM
+   ============================================ */
+const newsForm = document.getElementById('newsForm');
+newsForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const input = newsForm.querySelector('input');
+  const btn = newsForm.querySelector('button');
+  if (!input.value.trim()) return;
+  btn.textContent = '✓';
+  input.value = '';
+  input.placeholder = 'Terima kasih!';
+  setTimeout(() => {
+    btn.textContent = 'Kirim';
+    input.placeholder = 'Email Anda';
+  }, 2600);
+});
+
+/* ============================================
+   ACTIVE NAV HIGHLIGHT (SCROLL SPY)
+   ============================================ */
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav a:not(.nav-cta)');
+
+const spyObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const id = entry.target.id;
+      navLinks.forEach(link => {
+        link.style.color = link.getAttribute('href') === `#${id}`
+          ? (header.classList.contains('scrolled') ? 'var(--text)' : '#fff')
+          : '';
+      });
+    }
+  });
+}, { threshold: 0.35, rootMargin: '-15% 0px -55% 0px' });
+
+sections.forEach(sec => spyObserver.observe(sec));
+</script>
+</body>
+</html>
